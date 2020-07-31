@@ -1,0 +1,49 @@
+.source-image {
+    position: relative;
+    display: inline-block;
+}
+
+.idol-face {
+    position: absolute;
+    text-align: left;
+    width: 0;
+    height: 0;
+    border: 2px #009c95 solid;
+    cursor: pointer;
+}
+
+.idol-name {
+    color: #f26202;
+    min-width: 100px;
+    position: absolute;
+}
+.ui.card>.content>.header:not(.ui), .ui.cards>.card>.content>.header:not(.ui){
+    text-align: center;
+    font-family: 'Dosis', sans-serif;
+}
+.ui.card>.content, .ui.cards>.card>.content,h1{
+    text-align:center;
+}
+.ui.list>.item .header{
+    font-family: 'Dosis', sans-serif;
+    font-size: medium;
+
+}
+.header{
+    font-family: 'Bad Script', cursive;
+}
+body{
+    background-image: url(./pexels-eberhard-grossgasteiger-2088203.jpg);
+    background-size: cover;
+    background-attachment: fixed;
+
+}
+.fixed-footer{
+    margin-top:20px; 
+    width: 100%;
+    background-color: #c8dae1;
+    text-align: center;
+}
+.container{
+    line-height: 30px;
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/semantic-ui/2.1.8/semantic.min.css" />
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet">  
+   <link href="https://fonts.googleapis.com/css2?family=Bad+Script&family=Lily+Script+One&display=swap" rel="stylesheet">  
+  <script src="test.js"></script>
+    <title>SNH48 Idol</title>
+</head>
+
+<body ng-app="app" ng-controller="mainCtrl">
+    <div class="ui container">
+        <div class="ui container"></div>
+        <h1 class="header">SNH48 Team SII Face Recognization</h1>
+        <!-- Form and Code Submit -->
+        <div class="ui form">
+            <div class="field">
+                <div ng-class="{loading: isLoading}" class="ui action input">
+                    <input  type="text" ng-model="imageLink" placeholder="Photo Url" />
+                    <button  ng-switch="isLoading" ng-disabled="isLoading || !imageLink" ng-click="recognize()" class="ui icon primary button">
+                        <span ng-switch-when="false" >
+                                        <i class="search icon"></i>
+                                        Search
+                        </span>
+                        <span ng-switch-when="true">
+                                        <i class="spinner loading icon"></i>
+                                        Loading...
+                        </span>
+                    </button>
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <!-- Return the result under form data-->
+        <div class="ui grid">
+            <div class="four wide column">
+                <h3 class="header">Member List</h3>
+                <div class="ui middle aligned animated list" >
+                    <div class="item" ng-repeat="idol in idols">
+                        <img class="ui avatar image" src="{{icon[$index]}}"/>
+                        <div class="content" >
+                          <div class="header">{{idol}}
+                        </div>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <!-- Append the member photo -->
+        <div class="source-image" class="six wide column" >
+            <img ng-if="imageLink" ng-src="{{imageLink}}" id="source-image" class="ui medium rounded image"/>
+            
+        </div>
+
+            <div class="six wide column">
+                <h3 class ="header"> Result</h3>
+                <div ng-show="faces.Name!=undefined" class="ui positive message">
+                    <div class="header">Congratulations! You get <b>{{faces.Name}}</b>
+                        <p>Nickname: {{faces.Nickname}}</p>
+                        <p>Birthday:{{faces.Birthday}}</p>
+                        <p>Is this result correct?</p>
+                    </div>
+                </div>
+                <div ng-show="faces =='Unknown person'" class="ui negative message">No match found!</div>
+            </div>
+        </div>
+        <br>
+
+        <!-- Available Member To Test -->
+        <div>
+            <h3 class="header">Available Member</h3>
+            <div class="ui four cards" ng-init="i=0">
+                <div class="card" ng-repeat="image in testImages">
+                    <div class="ui slide masked reveal image" >
+                        <img ng-src="{{image.img1}}" class ="visible content">
+                        <img ng-src="{{image.img2}}" class ="hidden content" >
+                </div>
+                <div class="content">
+                    <p class="header">{{idols[$index]}}</p>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<footer class="fixed-footer">
+    <div class="container">Made by Van Nguyen - Duahau1</div>        
+</footer>
+</html>
