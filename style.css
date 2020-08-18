@@ -44,9 +44,12 @@ body{
     background-color: #c8dae1;
     text-align: center;
 }
-.container{
+.container1{
     line-height: 30px;
+    text-align: center;
+    
 }
+
 .bar {
     fill: #9ecae1;
     border-radius: 2px;
@@ -66,3 +69,7 @@ body{
     border-radius: 4px;
     transition: opacity 0.2s ease;
   }
+.cont-svg{
+    width:70%;
+    height:60%;
+}
