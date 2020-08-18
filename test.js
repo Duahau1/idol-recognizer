@@ -208,11 +208,14 @@ const margin = { top: 20, right: 20, bottom: 30, left: 40 };
     const container = d3
       .select('body')
       .append('div')
-      .attr('class', 'container');
+      .attr('class', 'container1');
     const svg = container
       .append('svg')
-      .attr('width', width + margin.left + margin.right)
-      .attr('height', height + margin.top + margin.bottom)
+      .attr('viewBox', `0 0 960 500`)
+      .attr("preserveAspectRatio", "xMidYMid meet ")
+      //.attr('width', width + margin.left + margin.right)
+      //.attr('height', height + margin.top + margin.bottom)
+      .attr('class','cont-svg')
       .append('g')
       .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 const tip = d3
