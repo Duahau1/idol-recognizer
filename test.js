@@ -21,7 +21,7 @@ app.factory('recognizeService', function ($http) {
 app.factory('upload', function ($http) {
 
 })
-app.controller('mainCtrl', function ($scope, recognizeService) {
+app.controller('mainCtrl', function ($scope, recognizeService,$http) {
     $scope.isLoading = false;
     $scope.$watch('imageLink', function (oldValue, newValue) {
         $scope.faces = [];
@@ -39,17 +39,44 @@ app.controller('mainCtrl', function ($scope, recognizeService) {
        // if($scope.check.value1 || $scope.check.value2){
         if(value =='value1'){
              $scope.check.value1=!$scope.check.value1;
+             let url = "https://graphservice.herokuapp.com/";
+             $http({
+                method:'POST',
+                url:url,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                data:{
+                    name:"Up vote"
+                }
+            }).then(poll=>{
+                console.log(poll.data);
+                update(poll.data)});
          }
          else{
              $scope.check.value2=!$scope.check.value2;
-
+             let url = "https://graphservice.herokuapp.com/";
+             $http({
+                method:'POST',
+                url:url,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                data:{
+                    name:"Down vote"
+                }
+            }).then(poll=>{
+                console.log(poll.data);
+                update(poll.data)});
          }
          console.log($scope.check);
          setTimeout(() => {
             $scope.$apply(() => {
                 $scope.imageLink = ""                    
             });
-          }, 2000);
+          }, 1000);
         //}
     }
     
@@ -92,7 +119,6 @@ app.controller('mainCtrl', function ($scope, recognizeService) {
 
         });
        
-    
     }
 
     // Danh sách ảnh để test
@@ -168,4 +194,102 @@ app.controller('mainCtrl', function ($scope, recognizeService) {
         "https://img.icons8.com/offices/50/000000/octopus.png",
         "https://img.icons8.com/office/50/000000/horse.png"
     ]
+
 });
+
+d3.select("body").append("h1").attr("class","header").text("Face Recognition's Accuracy's Survey");
+const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+    const width = 960 - margin.left - margin.right;
+    const height = 500 - margin.top - margin.bottom;
+    let url = "https://graphservice.herokuapp.com/";
+
+    let xScale = d3.scaleBand().range([0, width]).padding(0.1);
+    let yScale = d3.scaleLinear().range([height, 0]);
+    const container = d3
+      .select('body')
+      .append('div')
+      .attr('class', 'container');
+    const svg = container
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+const tip = d3
+    .select('body')
+    .append('div')
+    .attr('class', 'tooltip');
+
+let updateData = fetch(url).then(res => res.json()).then((data) => {
+        svg
+        .append('g')
+        .attr('transform', 'translate(0,' + height + ')')
+        .attr('class', 'x-axis')
+        .call(d3.axisBottom(xScale));
+
+      // add the y Axis
+      svg
+        .append('g')
+        .attr('class', 'y-axis')
+        .call(d3.axisLeft(yScale));
+        update(data);
+
+})
+
+function update(poll) {
+    // Scale the range of the data in the x axis
+    xScale.domain(
+      poll.map(d => {
+        return d.name;
+      })
+    );
+
+    // Scale the range of the data in the y axis
+    yScale.domain([
+      0,
+      d3.max(poll, d => {
+        return d.votes;
+      }),
+    ]);
+    let total = poll[0].votes +poll[1].votes;
+
+    // Select all bars on the graph, take them out, and exit the previous data set.
+    // Enter the new data and append the rectangles for each object in the poll array
+    svg
+      .selectAll('.bar')
+      .remove()
+      .exit()
+      .data(poll)
+      .enter()
+      .append('rect')
+      .attr('class', 'bar')
+      .attr('x', d => {
+        return xScale(d.name);
+      })
+      .attr('width', xScale.bandwidth())
+      .attr('y', d => {
+        return yScale(d.votes);
+      })
+      .attr('height', d => {
+        return height - yScale(d.votes);
+      })
+      .on('mousemove', d => {
+        tip
+          .style('position', 'absolute')
+          .style('left', `${d3.event.pageX + 10}px`)
+          .style('top', `${d3.event.pageY + 20}px`)
+          .style('display', 'inline-block')
+          .style('opacity', '0.9')
+          .html(
+            `<div><strong>${d.name}'s percentage</strong></div> <span>`+Math.round((d.votes/total)*100) +" % </span>"
+          );
+      })
+      .on('mouseout', () => tip.style('display', 'none'));
+
+    // update the x-axis
+    svg.select('.x-axis').call(d3.axisBottom(xScale));
+
+    // update the y-axis
+    svg.select('.y-axis').call(d3.axisLeft(yScale));
+  }
+
