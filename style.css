@@ -47,3 +47,22 @@ body{
 .container{
     line-height: 30px;
 }
+.bar {
+    fill: #9ecae1;
+    border-radius: 2px;
+    opacity: 0.6;
+    stroke-width: 2;
+    stroke: cadetblue;
+  }
+
+  .bar:hover {
+    fill: #deebf7;
+  }
+
+  .tooltip {
+    opacity: 0;
+    background-color: rgb(170, 204, 247);
+    padding: 5px;
+    border-radius: 4px;
+    transition: opacity 0.2s ease;
+  }
