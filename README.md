@@ -6,7 +6,7 @@ Link: https://duahau1.github.io/idol-recognizer/
 
 <h2>Additional information</h2>
 
-- Version 1.0.0
+-Version 1.0.0
 
 * This website uses Microsoft Face API to train and recognize faces. The accuracy of identifying a correct listed idol is 67% as tested with 3 top searched images found by using Microsoft Bing Web Search API.
 * This website uses a serverless function hosted on Vercel to call all the APIs so it takes some extra for every requests. Also, I use my custom REST API hosted on Heroku with a in-memory cache to increase performance.
