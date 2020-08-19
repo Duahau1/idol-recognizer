@@ -30,15 +30,8 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
             document.getElementById('source-image').removeAttribute("src")
         }
     });
-    $scope.check ={
-        value1: false,
-        value2: false
-    }
-    $scope.toggleSelection = function (value){
-        //$scope.check[value]=!$scope.check[value];
-       // if($scope.check.value1 || $scope.check.value2){
+    $scope.toggleSelection = function (value){        
         if(value =='value1'){
-             $scope.check.value1=!$scope.check.value1;
              let url = "https://graphservice.herokuapp.com/";
              $http({
                 method:'POST',
@@ -55,7 +48,6 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
                 update(poll.data)});
          }
          else{
-             $scope.check.value2=!$scope.check.value2;
              let url = "https://graphservice.herokuapp.com/";
              $http({
                 method:'POST',
@@ -71,10 +63,13 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
                 console.log(poll.data);
                 update(poll.data)});
          }
-         console.log($scope.check);
          setTimeout(() => {
             $scope.$apply(() => {
-                $scope.imageLink = ""                    
+               let buttons= document.getElementsByName("example2");
+                    buttons[0].checked=false;
+                    buttons[1].checked=false;
+                $scope.imageLink = ""
+
             });
           }, 1000);
         //}
