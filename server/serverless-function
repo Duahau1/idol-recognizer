@@ -1,0 +1,128 @@
+const axios = require('axios');
+const express = require('express');
+const redis = require('redis');
+const cors = require('cors');
+const bodyparser = require('body-parser');
+const app = express();
+app.use(cors());
+app.use(bodyparser.json());
+
+let client = redis.createClient({
+    port: //your port,              
+    host: //your redislab endpoint, 
+    password: //your password
+
+})
+let key = //your Microsoft API key;
+let admin = //The JWT Admin token;
+let groupId = 'myoshimen';
+var idolPerson = require('./oshimen_person.json');
+async function detect(imageUrl) {
+    console.log(`Begin to detect face from image: ${imageUrl}`);
+    let url = "https://snh48oshimen.cognitiveservices.azure.com/face/v1.0/detect";
+    return await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Ocp-Apim-Subscription-Key': key,
+            'Content-Type': "application/json"
+        },
+        data: {
+            url: imageUrl
+        }
+    });
+}
+async function getDetails(name) {
+    let url = `https://snh48-rest-api.herokuapp.com/api/snh48/member?name=${name}`;
+    return await axios({
+        method: 'get',
+        url: url,
+        headers: {
+            token: `Bearer ${admin}`
+        }
+    })
+
+}
+async function identify(faceIds) {
+    console.log(`Begin to identify face.`);
+    let url = 'https://snh48oshimen.cognitiveservices.azure.com/face/v1.0/identify';
+    return await axios({
+        method: 'post',
+        url: url,
+        headers: {
+            'Ocp-Apim-Subscription-Key': key,
+            'Content-Type': "application/json"
+        },
+        data: {
+            "personGroupId": groupId,
+            "faceIds": faceIds,
+            "maxNumOfCandidatesReturned": 1
+        }
+    });
+}
+
+module.exports = app.post("/api/index", async (req, res) => {
+    try {
+        client.on("connect", function () {
+            console.log("Connection to Redis is successful");
+        });
+        let imageUrl = req.body.url;
+        console.log(`Begin to recognize image: ${imageUrl}`);
+        var detectedFaces = await detect(imageUrl).then(res => res.data)
+        if (detectedFaces.length == 0) {
+            console.log("Can't detect any face");
+            return;
+        }
+        var identifiedResult = await identify([detectedFaces[0].faceId]).then(res => res.data);
+        console.log("Done identifying");
+
+        var allIdols = identifiedResult.map(result => {
+            // Lấy vị trí khuôn mặt trong ảnh để hiển thị
+            result.face = detectedFaces.filter(face => face.faceId == result.faceId)[0].faceRectangle;
+            // Tìm idol đã được nhận diện từ DB
+            if (result.candidates.length > 0) {
+                // Kết quả chỉ trả về ID, dựa vào ID này ta tìm tên của idol
+                var idolId = result.candidates[0].personId;
+                var idol = idolPerson.filter(person => person.personId == idolId)[0];
+                result.idol = {
+                    id: idol.userData,
+                    name: idol.name
+                };
+            } else {
+                result.idol = {
+                    id: 0,
+                    name: 'Unknown'
+                }
+                throw new Error("Unknow");
+            }
+            return result;
+        });
+        client.dbsize((err,num)=>{
+            if(num>30){
+                client.flushall();
+            }
+        })
+        
+
+        client.get(allIdols[0].idol.name, async (err, data) => {
+            if (data) {
+                console.log("In-Cache")
+                return res.status(200).send(JSON.parse(data));
+            }
+            else {
+                
+                
+                let info = await getDetails(allIdols[0].idol.name).then(resp => resp.data);
+                allIdols[0].info = info;
+                client.setex(allIdols[0].idol.name, 1440, JSON.stringify(allIdols));
+                return res.status(200).send(allIdols);
+            }
+        })
+   // let info = await getDetails(allIdols[0].idol.name).then(resp => resp.data);
+   // allIdols[0].info = info;
+    //res.send(allIdols);
+    }
+    catch (err) {
+        res.send("Unknown person");
+    }
+})
