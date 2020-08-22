@@ -12,4 +12,5 @@ Link: https://duahau1.github.io/idol-recognizer/
 * This is a gift for SNH48's team SII Gen 1 's Graduation.
 * Integrate D3.js to implement bar chart that shows the accuracy's result. 
 * The plot shows the percentage of the correct recognition and the wrong recognition.
-* Redis Cache is on set up.
+* Redis Cache has been set up hosted on Redis Labs (30MB as limit) so if the keys exceed more than 30 the cache would be flush. Since we are only looking at the name and the birthday so we don't need to invalidate the cache.
+
