@@ -121,14 +121,14 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
         //1
         {
 
-            img1: "https://tse1.mm.bing.net/th?id=OIP.EMOVwTeh7DRKZD-wvS3BngHaK6&pid=Api",
-            img2: "https://res.cloudinary.com/duahau/image/upload/v1598889362/118471870_3196235993759527_7938333192663909149_n.jpg_n80kfw.jpg"
+            img2: "https://res.cloudinary.com/duahau/image/upload/v1598890812/117174276_161499232142284_7654867586767352774_n.jpg_ixavua.jpg",
+            img1: "https://res.cloudinary.com/duahau/image/upload/v1598889362/118471870_3196235993759527_7938333192663909149_n.jpg_n80kfw.jpg"
 
         },
         //2    
         {
             img2: "https://res.cloudinary.com/duahau/image/upload/v1598889475/118536652_636791750306061_7057548639248819884_o.jpg_ao8qy9.jpg",
-            img1: "https://res.cloudinary.com/duahau/image/upload/v1595964508/116273344_613201085998461_8473487049068399947_n_t8tyc4.jpg"
+            img1: "https://res.cloudinary.com/duahau/image/upload/v1598890533/118346692_630542827597620_3388296789485866243_o.jpg_n3ikd8.jpg"
         },
         //3
         {
@@ -158,7 +158,7 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
         //8
         {
             img2: "https://res.cloudinary.com/duahau/image/upload/v1595897501/66432342_898802363800341_2239771452830121984_o_nnxpow.jpg",
-            img1: "https://res.cloudinary.com/duahau/image/upload/v1598889669/66449195_898802323800345_2335854458266714112_o.jpg_ygbs7y.jpg"
+            img1: "https://res.cloudinary.com/duahau/image/upload/v1595897504/67690089_908254196188491_8737729888443695104_o_hpw567.png"
         },
         //9
         {
