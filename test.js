@@ -122,13 +122,13 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
         {
 
             img1: "https://tse1.mm.bing.net/th?id=OIP.EMOVwTeh7DRKZD-wvS3BngHaK6&pid=Api",
-            img2: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/104754423_3024460400937088_5437555570508536303_n.jpg?_nc_cat=102&_nc_sid=0be424&_nc_ohc=U7BJkjIVuagAX_NOC0U&_nc_ht=scontent-sea1-1.xx&oh=29ab882aabd4f6aea2f3f10b933e5b54&oe=5F4A7042"
+            img2: "https://res.cloudinary.com/duahau/image/upload/v1598889362/118471870_3196235993759527_7938333192663909149_n.jpg_n80kfw.jpg"
 
         },
         //2    
         {
-            img2: "https://i.pinimg.com/originals/47/06/4e/47064e32d318569877597999a8a8317c.jpg",
-            img1: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-9/s960x960/116372124_614987245819845_2249995862082645496_o.jpg?_nc_cat=101&_nc_sid=0be424&_nc_ohc=a8Es6KM-qTgAX8M-LTj&_nc_ht=scontent-sea1-1.xx&_nc_tp=7&oh=7011d3c54ec239c78d89f9d175cdb2e6&oe=5F49D264"
+            img2: "https://res.cloudinary.com/duahau/image/upload/v1598889475/118536652_636791750306061_7057548639248819884_o.jpg_ao8qy9.jpg",
+            img1: "https://res.cloudinary.com/duahau/image/upload/v1595964508/116273344_613201085998461_8473487049068399947_n_t8tyc4.jpg"
         },
         //3
         {
@@ -158,7 +158,7 @@ app.controller('mainCtrl', function ($scope, recognizeService,$http) {
         //8
         {
             img2: "https://res.cloudinary.com/duahau/image/upload/v1595897501/66432342_898802363800341_2239771452830121984_o_nnxpow.jpg",
-            img1: "https://scontent-sea1-1.xx.fbcdn.net/v/t1.0-0/p640x640/107599455_800662423671544_4685087564412821781_o.jpg?_nc_cat=104&_nc_sid=0be424&_nc_ohc=pvBSuFAVhRsAX-btGZl&_nc_ht=scontent-sea1-1.xx&_nc_tp=6&oh=7206ebb474c68c62aad1b9ddece536e7&oe=5F49C12F"
+            img1: "https://res.cloudinary.com/duahau/image/upload/v1598889669/66449195_898802323800345_2335854458266714112_o.jpg_ygbs7y.jpg"
         },
         //9
         {
