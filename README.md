@@ -2,7 +2,7 @@
 
 <h2> Description </h2>
 A simple web page that takes in a link of image and identify member of snh48's team sii
-Link: https://duahau1.github.io/idol-recognizer/
+Link: https://idol-recognizer.herokuapp.com/
 
 <h2>Additional information</h2>
 
