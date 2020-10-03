@@ -5,7 +5,7 @@ A simple web page that takes in a link of image and identify member of snh48's t
 Link: https://idol-recognizer.herokuapp.com/
 
 <h2>View of the webpage</h2>
-<<img src="./TestingWebsite.PNG"  height="350px" />
+<<img src="./Testing website.PNG"  height="350px" />
 
 <h2>Additional information</h2>
 
