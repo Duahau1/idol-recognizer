@@ -4,6 +4,9 @@
 A simple web page that takes in a link of image and identify member of snh48's team sii
 Link: https://idol-recognizer.herokuapp.com/
 
+<h2>View of the webpage</h2>
+<<img src="./TestingWebsite.PNG"  height="350px" />
+
 <h2>Additional information</h2>
 
 * This website uses Microsoft Face API to train and recognize faces. The accuracy of identifying a correct listed idol is 67% as tested with 3 top searched images found by using Microsoft Bing Web Search API.
