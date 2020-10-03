@@ -5,7 +5,7 @@ A simple web page that takes in a link of image and identify member of snh48's t
 Link: https://idol-recognizer.herokuapp.com/
 
 <h2>View of the webpage</h2>
-<<img src="./Testing website.PNG"  height="350px" />
+<img src="./Testing website.PNG"  height="350px" />
 
 <h2>Additional information</h2>
 
@@ -15,7 +15,7 @@ Link: https://idol-recognizer.herokuapp.com/
 * This is a gift for SNH48's team SII Gen 1 's Graduation.
 * Integrate D3.js to implement bar chart that shows the accuracy's result. 
 * The plot shows the percentage of the correct recognition and the wrong recognition.
-* Redis Cache has been set up hosted on Redis Labs (30MB as limit) so if the keys exceed more than 30 the cache would be flush. Since we are only looking at the name and the birthday so we don't need to invalidate the cache.
+* Redis Cache has been set up hosted on Redis Labs (30MB as limit) so if the keys exceed more than 30 the cache would be flushed. Since we are only looking at the name and the birthday so we don't need to invalidate the cache.
 
 * Schema of technologies used in this project
 <img src="./Blank Diagram.png"  height="350px" />
